@@ -1,9 +1,22 @@
 const React = require('react')
 
-// const { map } = require('fun-fp')
+const { map } = require('fun-fp')
 const TodoItem = require('./todo-item')
 
 const App = React.createClass({
+  getInitialState () {
+    return {
+      todos: [{
+        id: 1,
+        title: 'Pick Final Project',
+        completed: false
+      }, {
+        id: 2,
+        title: 'Plan Final Project',
+        completed: false
+      }]
+    }
+  },
   render() {
     return (
       <section className="todoapp">
@@ -15,6 +28,7 @@ const App = React.createClass({
           <input type="checkbox" className="toggle-all" />
           <label htmlFor="toggle-all">Mark all as complete</label>
           <ul className="todo-list">
+            { map(todo => <TodoItem todo={todo} />, this.state.todos)}
           </ul>
         </section>
         <footer className="footer">
