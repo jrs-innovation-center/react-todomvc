@@ -5,7 +5,9 @@ const TodoItem = React.createClass({
     return (
       <li>
         <div className="view">
-          <input type="checkbox" className="toggle"/>
+          <input type="checkbox" className="toggle"
+            checked={this.props.todo.completed}
+            onChange={this.props.onToggle} />
           <label htmlFor="">{this.props.todo.title}</label>
           <button className="destroy"></button>
         </div>
@@ -14,5 +16,10 @@ const TodoItem = React.createClass({
     )
   }
 })
+
+TodoItem.propTypes = {
+  onToggle: React.PropTypes.func,
+  todo: React.PropTypes.object
+}
 
 module.exports = TodoItem
