@@ -32,13 +32,15 @@ const App = React.createClass({
     this.setState({ todos, newTodo: { title: '', completed: false}})
   },
   toggleTodo (todo) {
-    const todos = map(item => {
-      if (item.id === todo.id) {
-        item.completed = !item.completed
-      }
-      return item
-    }, [...this.state.todos])
-    this.setState({todos})
+    return (e) => {
+      const todos = map(item => {
+        if (item.id === todo.id) {
+          item.completed = !item.completed
+        }
+        return item
+      }, [...this.state.todos])
+      this.setState({todos})
+    }
   },
   render() {
     return (
@@ -57,7 +59,11 @@ const App = React.createClass({
           <input type="checkbox" className="toggle-all" />
           <label htmlFor="toggle-all">Mark all as complete</label>
           <ul className="todo-list">
-            { map(todo => <TodoItem key={todo.id} todo={todo} onToggle={this.toggleTodo} />, this.state.todos)}
+            { map(todo => <TodoItem
+                key={todo.id}
+                todo={todo}
+                onToggle={this.toggleTodo(todo)}
+              />, this.state.todos)}
           </ul>
         </section>
         <footer className="footer">

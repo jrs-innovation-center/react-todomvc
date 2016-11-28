@@ -3,7 +3,7 @@ const React = require('react')
 const TodoItem = React.createClass({
   render () {
     return (
-      <li>
+      <li className={this.props.todo.completed ? 'completed' : ''}>
         <div className="view">
           <input type="checkbox" className="toggle"
             checked={this.props.todo.completed}

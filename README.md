@@ -47,6 +47,7 @@ component
 
 * create onToggle function
 * pass to todo-item as prop
+* if the item is completed add `completed to the classname`
 
 ## Step 4 - edit item
 
