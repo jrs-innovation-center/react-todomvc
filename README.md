@@ -85,10 +85,13 @@ tell the app state to remove the item
 
 ## Step 6 - show active item count
 
-## Step 7 - filter active items
+* reduce over todos and inc completed = false
 
-## Step 8 - filter completed items
+## Step 7 - filter active items and filter completed items and all items
 
-## Step 9 - remove filter
+* toggle viewState = 'active'
+* on render filter todos based on viewState
 
 ## Step 10 - clear completed
+
+* handle completed click and filter todos and assign filtered list 

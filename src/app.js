@@ -1,6 +1,6 @@
 const React = require('react')
 
-const { map, reject } = require('fun-fp')
+const { map, reject, reduce } = require('fun-fp')
 const TodoItem = require('./todo-item')
 
 const App = React.createClass({
@@ -98,7 +98,11 @@ const App = React.createClass({
           </ul>
         </section>
         <footer className="footer">
-          <span className="todo-count"><strong>0</strong> item(s) left</span>
+          <span className="todo-count"><strong>{
+            reduce((a, v) =>
+              v.completed ? a : ++a
+            , 0, this.state.todos)            
+          }</strong> item(s) left</span>
           <ul className="filters">
             <li><a href="/">All</a></li>
             <li>
