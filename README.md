@@ -79,6 +79,10 @@ component
 
 ## Step 5 - delete item
 
+* When the delete button is clicked we want to
+tell the app state to remove the item
+
+
 ## Step 6 - show active item count
 
 ## Step 7 - filter active items

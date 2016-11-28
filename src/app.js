@@ -1,6 +1,6 @@
 const React = require('react')
 
-const { map } = require('fun-fp')
+const { map, reject } = require('fun-fp')
 const TodoItem = require('./todo-item')
 
 const App = React.createClass({
@@ -63,6 +63,12 @@ const App = React.createClass({
       })
     }
   },
+  removeTodo (todo) {
+    return (e) => {
+      const todos = reject(item => todo.id === item.id, this.state.todos)
+      this.setState({todos})
+    }
+  },
   render() {
     return (
       <section className="todoapp">
@@ -87,6 +93,7 @@ const App = React.createClass({
                 onEdit={this.editTodo(todo)}
                 editing={this.state.editing}
                 onSave={this.saveTodo(todo)}
+                onDestroy={this.removeTodo(todo)}
               />, this.state.todos)}
           </ul>
         </section>

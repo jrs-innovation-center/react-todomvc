@@ -26,7 +26,6 @@ const TodoItem = React.createClass({
       if (this.props.editing === this.props.todo.id) { return 'editing'}
       return ''
     }
-    {console.log(this.props.editing)}
     return (
       <li className={todoState()}>
         <div className="view">
@@ -36,7 +35,7 @@ const TodoItem = React.createClass({
           <label onDoubleClick={this.handleEdit}>
              {this.props.todo.title}
           </label>
-          <button className="destroy"></button>
+          <button className="destroy" onClick={this.props.onDestroy}></button>
         </div>
         <input type="text" className="edit"
           value={this.state.editText}
