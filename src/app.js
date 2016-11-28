@@ -1,11 +1,12 @@
 const React = require('react')
 
-const { map, reject, reduce } = require('fun-fp')
+const { map, reject, reduce, filter } = require('fun-fp')
 const TodoItem = require('./todo-item')
 
 const App = React.createClass({
   getInitialState () {
     return {
+      viewState: 'all',
       editing: null,
       newTodo: {
         title: '',
@@ -69,6 +70,12 @@ const App = React.createClass({
       this.setState({todos})
     }
   },
+  setViewState (view) {
+    return (e) => {
+      e.preventDefault()
+      this.setState({viewState: view})
+    }
+  },
   render() {
     return (
       <section className="todoapp">
@@ -94,21 +101,31 @@ const App = React.createClass({
                 editing={this.state.editing}
                 onSave={this.saveTodo(todo)}
                 onDestroy={this.removeTodo(todo)}
-              />, this.state.todos)}
+              />, filter((todo) => {
+                if (this.state.viewState === 'active' && !todo.completed) {
+                  return todo
+                }
+                if (this.state.viewState === 'completed' && todo.completed) {
+                  return todo
+                }
+                if (this.state.viewState === 'all') {
+                  return todo
+                }
+              }, this.state.todos))}
           </ul>
         </section>
         <footer className="footer">
           <span className="todo-count"><strong>{
             reduce((a, v) =>
               v.completed ? a : ++a
-            , 0, this.state.todos)            
+            , 0, this.state.todos)
           }</strong> item(s) left</span>
           <ul className="filters">
-            <li><a href="/">All</a></li>
+            <li><a href="/" onClick={this.setViewState('all')}>All</a></li>
             <li>
-              <a href="/active">Active</a>
+              <a href="/active" onClick={this.setViewState('active')}>Active</a>
             </li>
-            <li><a href="/completed">Completed</a></li>
+            <li><a href="/completed" onClick={this.setViewState('completed')}>Completed</a></li>
           </ul>
           <button className="clear-completed">Clear completed</button>
         </footer>

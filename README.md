@@ -92,6 +92,6 @@ tell the app state to remove the item
 * toggle viewState = 'active'
 * on render filter todos based on viewState
 
-## Step 10 - clear completed
+## Step 8 - clear completed
 
-* handle completed click and filter todos and assign filtered list 
+* handle completed click and filter todos and assign filtered list
