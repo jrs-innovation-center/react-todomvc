@@ -76,6 +76,11 @@ const App = React.createClass({
       this.setState({viewState: view})
     }
   },
+  clearTodos (e) {
+    
+    const todos = reject(item => item.completed, this.state.todos)
+    this.setState({todos})
+  },
   render() {
     return (
       <section className="todoapp">
@@ -127,7 +132,7 @@ const App = React.createClass({
             </li>
             <li><a href="/completed" onClick={this.setViewState('completed')}>Completed</a></li>
           </ul>
-          <button className="clear-completed">Clear completed</button>
+          <button className="clear-completed" onClick={this.clearTodos}>Clear completed</button>
         </footer>
       </section>
     )
