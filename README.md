@@ -49,9 +49,33 @@ component
 * pass to todo-item as prop
 * if the item is completed add `completed to the classname`
 
-## Step 4 - edit item
+## Step 4 - edit todo item
 
+* TodoItem needs its own state
+  editText: this.props.todo.title
+* TodoItem needs to handle the following events
+  - handleEdit
+  - handleChange
+  - handleSubmit
 
+* View Label should listen for double click event
+  - onDoubleClick = this.handleEdit
+
+* Edit Input should be controlled
+  - value = this.state.editText
+  - onChange = this.state.handleChange
+  - onBlur = this.state.handleSubmit
+
+* Implement editText, handleChange, handleSubmit on TodoItem Component
+
+* Render method should change li className to editing if this.props.editing is not null
+
+* App should pass the following props to TodoItem
+  - editing = this.state.editing
+  - onEdit = this.editTodo(todo)
+  - onSave = this.saveTodo(todo)
+
+* Implement editTodo and saveTodo on app component
 
 ## Step 5 - delete item
 
