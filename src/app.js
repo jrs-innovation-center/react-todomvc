@@ -6,6 +6,10 @@ const TodoItem = require('./todo-item')
 const App = React.createClass({
   getInitialState () {
     return {
+      newTodo: {
+        title: '',
+        completed: false
+      },
       todos: [{
         id: 1,
         title: 'Pick Final Project',
@@ -17,12 +21,28 @@ const App = React.createClass({
       }]
     }
   },
+  handleChange(e) {
+    this.setState({ newTodo: { title: e.target.value }})
+  },
+  handleSubmit(e) {
+    e.preventDefault()
+    const newTodo = {...this.state.newTodo}
+    newTodo.id = new Date().toISOString()
+    const todos = [...this.state.todos, newTodo]
+    this.setState({ todos, newTodo: { title: '', completed: false}})
+  },
   render() {
     return (
       <section className="todoapp">
         <header className="header">
           <h1>Todos</h1>
-          <input className="new-todo" type="text" placeholder="What needs to be done?" autoFocus />
+          <form onSubmit={this.handleSubmit}>
+          <input className="new-todo" type="text"
+            placeholder="What needs to be done?" autoFocus
+            onChange={this.handleChange}
+            value={this.state.newTodo.title}
+          />
+          </form>
         </header>
         <section id="main">
           <input type="checkbox" className="toggle-all" />
