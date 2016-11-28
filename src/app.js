@@ -6,6 +6,7 @@ const TodoItem = require('./todo-item')
 const App = React.createClass({
   getInitialState () {
     return {
+      editing: null,
       newTodo: {
         title: '',
         completed: false
@@ -42,6 +43,26 @@ const App = React.createClass({
       this.setState({todos})
     }
   },
+  editTodo (todo) {
+    return () => {
+      this.setState({editing: todo.id})
+    }
+  },
+  saveTodo (todo) {
+    return (val) => {
+      // need to update todo
+      const todos = map(item => {
+        if (item.id === todo.id) {
+          item.title = val
+        }
+        return item
+      }, this.state.todos)
+      this.setState({
+        editing: null,
+        todos
+      })
+    }
+  },
   render() {
     return (
       <section className="todoapp">
@@ -63,6 +84,9 @@ const App = React.createClass({
                 key={todo.id}
                 todo={todo}
                 onToggle={this.toggleTodo(todo)}
+                onEdit={this.editTodo(todo)}
+                editing={this.state.editing}
+                onSave={this.saveTodo(todo)}
               />, this.state.todos)}
           </ul>
         </section>
